@@ -1,3 +1,4 @@
+import { SignedOut, SignInButton, SignUpButton, SignedIn, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 
 export default function Home() {
@@ -15,6 +16,13 @@ export default function Home() {
           <h1 className="text-2xl font-bold text-red-600">24Hour AI</h1>
         </div>
         <nav className="hidden sm:flex gap-6">
+            <SignedOut>
+              <SignInButton />
+              <SignUpButton />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           <a href="#features" className="text-red-600 hover:underline">Features</a>
           <a href="#pricing" className="text-red-600 hover:underline">Pricing</a>
           <a href="#faq" className="text-red-600 hover:underline">FAQ</a>
