@@ -1,34 +1,12 @@
-import { SignedOut, SignInButton, SignUpButton, SignedIn, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
+import Header from "@/components/Header";
+
 
 export default function Home() {
   return (
     <div className="grid grid-rows-[auto_1fr_auto] min-h-screen bg-white text-gray-900 p-8 font-[family-name:var(--font-geist-sans)]">
-      <header className="flex justify-between items-center py-4">
-        <div className="flex items-center gap-2">
-          <Image
-            src="/24Hour-ai-logo-1.png" 
-            alt="ChatVend logo"
-            width={100}
-            height={100}
-            className="rounded-lg bg-red-600 p-1"
-          />
-          <h1 className="text-2xl font-bold text-red-600">24Hour AI</h1>
-        </div>
-        <nav className="hidden sm:flex gap-6">
-            <SignedOut>
-              <SignInButton />
-              <SignUpButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          <a href="#features" className="text-red-600 hover:underline">Features</a>
-          <a href="#pricing" className="text-red-600 hover:underline">Pricing</a>
-          <a href="#faq" className="text-red-600 hover:underline">FAQ</a>
-        </nav>
-      </header>
-      
+      <Header />
+
       <main className="flex flex-col items-center justify-center text-center gap-8 py-12">
         <div className="max-w-3xl">
           <h2 className="text-4xl sm:text-6xl font-bold mb-6 text-red-600">
@@ -36,11 +14,11 @@ export default function Home() {
             <span className="block text-red-700">Just $1</span>
           </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-800">
-            Access multiple cutting-edge LLMs for 24 hours straight. 
+            Access multiple cutting-edge LLMs for 24 hours straight.
             Like a vending machine for AI - insert a dollar, get unlimited conversations.
           </p>
         </div>
-        
+
         <div className="relative w-full max-w-md aspect-[3/4] my-8">
           <div className="absolute inset-0 bg-red-100 rounded-xl backdrop-blur-sm"></div>
           <div className="absolute inset-2 bg-white rounded-lg border-2 border-red-200 flex flex-col">
@@ -68,7 +46,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        
+
         <div className="flex gap-4 flex-col sm:flex-row mt-6">
           <a
             className="rounded-full bg-red-600 text-white font-bold py-3 px-8 text-lg hover:bg-red-700 transition-colors"
@@ -83,7 +61,7 @@ export default function Home() {
             Learn more
           </a>
         </div>
-        
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12 w-full max-w-5xl mx-auto px-4">
           <div className="bg-red-50 p-4 sm:p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col items-center sm:items-start text-center sm:text-left">
             <div className="w-16 h-16 sm:w-20 sm:h-20 relative mb-3 sm:mb-4">
@@ -123,7 +101,7 @@ export default function Home() {
           </div>
         </div>
       </main>
-      
+
       <footer className="py-6 flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-red-100">
         <p className="text-sm text-gray-600">© 2025 ruizTechServices,LLC. All rights reserved.</p>
         <div className="flex gap-6">
