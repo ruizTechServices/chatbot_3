@@ -5,7 +5,7 @@ import { Message } from '@/components/useChatContext';
 export async function POST(req: NextRequest) {
   try {
     // Parse request body
-    const { provider = 'openai', model = 'gpt-3.5-turbo', chatContext, temperature, maxTokens } = await req.json();
+    const { provider = 'openai', model = 'gpt-3.5-turbo', chatContext } = await req.json();
     
     // Validate chat context
     if (!Array.isArray(chatContext)) {
@@ -40,9 +40,7 @@ export async function POST(req: NextRequest) {
     // Call the provider's handler function
     const response = await providerConfig.handler({
       model,
-      chatContext,
-      temperature,
-      maxTokens
+      chatContext
     });
     
     // Return standardized response
