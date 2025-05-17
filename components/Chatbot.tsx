@@ -142,6 +142,7 @@ const Chatbot = () => {
     e?.preventDefault();
     if (!input.trim()) return;
     await sendMessage(input);
+    // await convertToVector(input);
     setInput('');
   };
 
