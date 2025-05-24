@@ -7,7 +7,7 @@ Implement a modular, extensible frontend interface for selecting and using multi
 
 ## 1. Model & Provider Registry
 
-- [ ] Create a `models.ts` or similar config file exporting an array/object of available LLM providers and their models.  
+- [x] Create a `models.ts` or similar config file exporting an array/object of available LLM providers and their models.  
   - Example structure:
     ```ts
     export const LLM_PROVIDERS = [
@@ -36,23 +36,23 @@ Implement a modular, extensible frontend interface for selecting and using multi
 
 ## 2. Dropdown UI Component
 
-- [ ] In the chat UI (e.g., `Chatbot.tsx`), add a dropdown menu for model selection.
-  - [ ] Group models by provider.
-  - [ ] Display both provider and model names.
-- [ ] Bind dropdown value to component state (`selectedProvider`, `selectedModel`).
+- [x] In the chat UI (e.g., `Chatbot.tsx`), add a dropdown menu for model selection.
+  - [x] Group models by provider.
+  - [x] Display both provider and model names.
+- [x] Bind dropdown value to component state (`selectedProvider`, `selectedModel`).
 
 ---
 
 ## 3. State Management
 
-- [ ] Store selected provider and model in React state.
-- [ ] On dropdown change, update state accordingly.
+- [x] Store selected provider and model in React state.
+- [x] On dropdown change, update state accordingly.
 
 ---
 
 ## 4. Sending Messages
 
-- [ ] When sending a message, include `provider` and `model` in the request payload to the backend, along with `chatContext`.
+- [x] When sending a message, include `provider` and `model` in the request payload to the backend, along with `chatContext`.
   - Example payload:
     ```json
     {
@@ -66,14 +66,14 @@ Implement a modular, extensible frontend interface for selecting and using multi
 
 ## 5. Extensibility
 
-- [ ] Ensure all provider/model options are generated from the config file, not hardcoded in components.
-- [ ] Document in code how to add a new provider/model (update config, no UI changes needed).
+- [x] Ensure all provider/model options are generated from the config file, not hardcoded in components.
+- [x] Document in code how to add a new provider/model (update config, no UI changes needed).
 
 ---
 
 ## 6. UI/UX
 
-- [ ] Clearly indicate the currently selected model/provider to the user.
+- [x] Clearly indicate the currently selected model/provider to the user.
 - [ ] Optionally, display short descriptions/tooltips for each model.
 
 ---
