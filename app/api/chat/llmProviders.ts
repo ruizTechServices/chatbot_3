@@ -117,21 +117,59 @@ async function handleAnthropic({ model, chatContext, temperature = 0.7, maxToken
 /**
  * LLM Provider Registry
  * Add new providers here with their supported models and handler functions
+ * Models are organized by tier for pricing considerations
  */
 export const LLM_PROVIDERS: LLMProviderRegistry = {
   openai: {
-    name: "OpenAI",
-    models: ["gpt-4", "gpt-4o-mini-search-preview", "gpt-3.5-turbo", "gpt-4-turbo"],
+    name: 'OpenAI',
+    models: [
+      // Basic Tier - Most cost-effective models
+      'gpt-3.5-turbo',        // $0.50 per 1M input tokens, $1.50 per 1M output tokens
+      'gpt-3.5-turbo-0125',   // Latest GPT-3.5 Turbo model
+      'gpt-3.5-turbo-1106',   // Previous stable version
+      
+      // Standard Tier - Balanced performance and cost
+      'gpt-4o-mini',          // Most cost-effective GPT-4 level model
+      'gpt-4.1-nano',         // Fastest, most cost-effective for low-latency
+      'gpt-4.1-mini',         // Affordable model balancing speed and intelligence
+      
+      // Premium Tier - Most capable models
+      'gpt-4',                // $30 per 1M input tokens, $60 per 1M output tokens
+      'gpt-4-turbo',          // Latest GPT-4 Turbo with vision capabilities
+      'gpt-4-turbo-preview',  // Preview of GPT-4 Turbo
+      'gpt-4-0613',           // Stable GPT-4 version
+      'gpt-4-32k',            // Extended context window (32K tokens)
+      'gpt-4-32k-0613',       // Stable 32K context version
+      'gpt-4.1',              // Smartest model for complex tasks
+      
+      // Reasoning Models - For complex multi-step problems
+      'o4-mini',              // Cost-efficient reasoning model
+      'o3',                   // Most powerful reasoning model (when available)
+    ],
     handler: handleOpenAI,
     requiresApiKey: true,
   },
   anthropic: {
-    name: "Anthropic",
-    models: ["claude-3-haiku-20240307", "claude-3-5-haiku-latest"],
+    name: 'Anthropic',
+    models: [
+      // Basic Tier - Fast and cost-effective
+      'claude-3-haiku-20240307',   // $0.25 per 1M input, $1.25 per 1M output (Legacy)
+      'claude-3-5-haiku-latest',   // $0.80 per 1M input, $4 per 1M output
+      
+      // Standard Tier - Balanced performance
+      'claude-3-sonnet-20240229',  // Legacy Sonnet model
+      'claude-3-5-sonnet-20241022', // Previous Sonnet 3.5 version
+      'claude-3-5-sonnet-latest',  // Latest Sonnet 3.5
+      'claude-3.7-sonnet',         // $3 per 1M input, $15 per 1M output
+      
+      // Premium Tier - Most intelligent models
+      'claude-3-opus-20240229',    // $15 per 1M input, $75 per 1M output (Legacy)
+      'claude-4-opus',             // $15 per 1M input, $75 per 1M output (Latest)
+      'claude-4-sonnet',           // $3 per 1M input, $15 per 1M output
+    ],
     handler: handleAnthropic,
     requiresApiKey: true,
-  }
-  // Add more providers here...
+  },
 };
 
 /**

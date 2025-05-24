@@ -12,6 +12,8 @@ export async function fetchLLMResponse({
   model: string;
   chatContext: any[];
 }): Promise<any> {
+  // Debug log to trace outgoing data
+  console.log('[fetchLLMResponse] Sending:', { provider, model, chatContext });
   const response = await fetch('/api/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

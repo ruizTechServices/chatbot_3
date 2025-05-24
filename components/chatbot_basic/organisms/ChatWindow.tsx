@@ -14,6 +14,13 @@ import { LLM_PROVIDERS } from '../helpers/providerMap';
 
 export function ChatWindow() {
   const { state, dispatch } = useChat();
+  // Ensure provider/model are always initialized
+  React.useEffect(() => {
+    if (!state.currentProvider && LLM_PROVIDERS.length > 0) {
+      dispatch({ type: 'SET_PROVIDER', payload: LLM_PROVIDERS[0].providerId });
+      dispatch({ type: 'SET_MODEL', payload: LLM_PROVIDERS[0].models[0] });
+    }
+  }, [state.currentProvider, state.currentModel, dispatch]);
   const [input, setInput] = useState('');
   const chatContextEndRef = useRef<HTMLDivElement | null>(null);
   useScrollBottom(chatContextEndRef, [state.chatContext]);
