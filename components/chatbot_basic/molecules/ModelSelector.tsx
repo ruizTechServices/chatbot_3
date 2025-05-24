@@ -1,11 +1,10 @@
 /**
  * ModelSelector Molecule
- * Handles provider and model selection for the chatbot.
+ * Allows the user to select LLM provider and model.
  */
 'use client';
 import React from 'react';
 import { LLMProvider } from '../types/chat';
-import { ChatSelect } from '../atoms/ChatSelect';
 
 interface ModelSelectorProps {
   providers: LLMProvider[];
@@ -13,7 +12,7 @@ interface ModelSelectorProps {
   currentModel: string;
   onProviderChange: (providerId: string) => void;
   onModelChange: (modelId: string) => void;
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 export function ModelSelector({
@@ -22,40 +21,47 @@ export function ModelSelector({
   currentModel,
   onProviderChange,
   onModelChange,
-  disabled
+  disabled = false,
 }: ModelSelectorProps) {
-  const currentProviderData = providers.find(p => p.providerId === currentProvider);
-  const availableModels = currentProviderData?.models || [];
+  const selectedProvider = providers.find(p => p.providerId === currentProvider);
+  const models = selectedProvider?.models || [];
 
   return (
-    <div className="flex flex-col md:flex-row gap-2 p-2 bg-gray-100 border-b">
-      <div className="flex flex-1 items-center">
-        <label htmlFor="provider-select" className="mr-2 text-sm font-medium text-gray-700">Provider:</label>
-        <ChatSelect
-          id="provider-select"
-          value={currentProvider}
-          onChange={e => onProviderChange(e.target.value)}
-          disabled={disabled}
-        >
-          {providers.map(provider => (
-            <option key={provider.providerId} value={provider.providerId}>
-              {provider.providerName}
-            </option>
-          ))}
-        </ChatSelect>
-      </div>
-      <div className="flex flex-1 items-center">
-        <label htmlFor="model-select" className="mr-2 text-sm font-medium text-gray-700">Model:</label>
-        <ChatSelect
-          id="model-select"
-          value={currentModel}
-          onChange={e => onModelChange(e.target.value)}
-          disabled={disabled || availableModels.length === 0}
-        >
-          {availableModels.map(model => (
-            <option key={model} value={model}>{model}</option>
-          ))}
-        </ChatSelect>
+    <div className="p-4">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
+          <div className="flex-1 sm:flex-initial">
+            <label className="block text-xs text-gray-400 mb-1">Provider</label>
+            <select
+              className="w-full bg-[#40414f] text-white border border-gray-600 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:border-gray-400"
+              value={currentProvider}
+              onChange={e => onProviderChange(e.target.value)}
+              disabled={disabled}
+            >
+              {providers.map(provider => (
+                <option key={provider.providerId} value={provider.providerId}>
+                  {provider.providerName}
+                </option>
+              ))}
+            </select>
+          </div>
+          
+          <div className="flex-1 sm:flex-initial">
+            <label className="block text-xs text-gray-400 mb-1">Model</label>
+            <select
+              className="w-full bg-[#40414f] text-white border border-gray-600 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:border-gray-400"
+              value={currentModel}
+              onChange={e => onModelChange(e.target.value)}
+              disabled={disabled || !selectedProvider}
+            >
+              {models.map(model => (
+                <option key={model} value={model}>
+                  {model}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
       </div>
     </div>
   );

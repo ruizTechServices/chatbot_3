@@ -5,7 +5,9 @@
 
 export interface Message {
   sender: 'user' | 'bot';
-  text: string;
+  text: string | string[];
+  timestamp?: string;
+  chatId?: string;
 }
 
 export interface LLMProvider {
