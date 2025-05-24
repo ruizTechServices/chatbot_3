@@ -74,27 +74,27 @@ Implement a modular, extensible frontend interface for selecting and using multi
 ## 6. UI/UX
 
 - [x] Clearly indicate the currently selected model/provider to the user.
-- [ ] Optionally, display short descriptions/tooltips for each model.
+- [x] Optionally, display short descriptions/tooltips for each model.
 
 ---
 
 ## 7. Testing
 
-- [ ] Test sending messages with each available model/provider.
-- [ ] Confirm correct request payloads are sent for each selection.
-- [ ] Confirm chat context is preserved when switching models/providers.
+- [x] Test sending messages with each available model/provider.
+- [x] Confirm correct request payloads are sent for each selection.
+- [x] Confirm chat context is preserved when switching models/providers.
 
 ---
 
 ## 8. Documentation
 
-- [ ] Add a section to `README.md` describing how to add new LLM providers/models to the frontend.
+- [x] Add a section to `README.md` describing how to add new LLM providers/models to the frontend.
 
 ---
 
 ## 9. (Optional) Advanced
 
-- [ ] Persist the last used model/provider in local storage or URL params for user convenience.
+- [x] Persist the last used model/provider in local storage or URL params for user convenience.
 
 ---
 

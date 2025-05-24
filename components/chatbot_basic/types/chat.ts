@@ -10,10 +10,16 @@ export interface Message {
   chatId?: string;
 }
 
+export interface Model {
+  id: string;
+  name: string;
+  description?: string;
+}
+
 export interface LLMProvider {
   providerId: string;
   providerName: string;
-  models: string[];
+  models: Model[];
   requiresApiKey?: boolean;
 }
 

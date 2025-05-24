@@ -92,6 +92,62 @@ Each provider handler is responsible for:
 - Handling provider-specific errors
 - Returning responses in a standardized format
 
+### Extending Frontend LLM Support
+
+To add new LLM providers or new models to existing providers on the frontend, you primarily need to modify the `components/chatbot_basic/helpers/providerMap.ts` file. This file contains the `LLM_PROVIDERS` array, which dictates what options are available in the chatbot's model selection UI.
+
+The `LLM_PROVIDERS` array is a list of provider objects. Each provider object has the following structure:
+
+*   `providerId`: A unique string identifier for the provider (e.g., `'openai'`, `'anthropic'`).
+*   `providerName`: A string used for displaying the provider's name in the UI (e.g., `'OpenAI'`, `'Anthropic'`).
+*   `models`: An array of model objects that this provider offers.
+*   `requiresApiKey`: A boolean indicating if the provider needs an API key. While primarily a backend concern, it's part of the shared data structure.
+
+Each model object within the `models` array must have the following fields:
+
+*   `id`: A unique string identifier for the model within that provider (e.g., `'gpt-4o-mini'`, `'claude-3-opus-20240229'`). This is the value sent to the backend.
+*   `name`: A string used for displaying the model's name in the UI (e.g., `'GPT-4o Mini'`, `'Claude 3 Opus'`).
+*   `description` (optional): A string that provides a short description of the model. This will be displayed as a tooltip in the model selection dropdown.
+
+**Example: Adding a new provider**
+
+```typescript
+// In components/chatbot_basic/helpers/providerMap.ts
+export const LLM_PROVIDERS: LLMProvider[] = [
+  // ... existing providers
+  {
+    providerId: 'new-provider',
+    providerName: 'New AI Provider',
+    models: [
+      { id: 'model-x', name: 'Model X', description: 'The latest and greatest Model X.' },
+      { id: 'model-y-beta', name: 'Model Y (Beta)', description: 'A beta version of Model Y.' },
+    ],
+    requiresApiKey: true, // Or false, depending on the provider
+  },
+];
+```
+
+**Example: Adding a new model to an existing provider**
+
+```typescript
+// In components/chatbot_basic/helpers/providerMap.ts
+// Find the provider you want to update, for example, OpenAI:
+{
+  providerId: 'openai',
+  providerName: 'OpenAI',
+  models: [
+    // ... existing OpenAI models
+    { id: 'gpt-5-preview', name: 'GPT-5 Preview', description: 'An early look at GPT-5.' },
+  ],
+  requiresApiKey: true,
+},
+// ... other providers
+```
+
+**Important Note:**
+
+Adding a new provider or model to the frontend configuration makes it visible in the UI. However, for the chatbot to actually *use* the new provider or model, corresponding backend support must also be implemented. This includes updating the backend's provider registry, request handling logic, and API key management for the new options. Refer to the "Adding a New Provider" section under "LLM Provider System" for backend modification details.
+
 ## Deployment
 
 This application is configured for deployment on platforms like Vercel or Netlify. Make sure to set all required environment variables in your deployment platform.

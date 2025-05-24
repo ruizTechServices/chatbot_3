@@ -2,10 +2,36 @@ import { NextRequest, NextResponse } from 'next/server';
 import { LLM_PROVIDERS, validateProviderAndModel, getAvailableProviders } from './llmProviders';
 import { Message } from '@/components/useChatContext';
 
+// In-memory store for request timestamps (per provider)
+const requestTimestamps: Record<string, number[]> = {};
+const MAX_REQUESTS_PER_MINUTE = 20;
+const WINDOW_MS = 60 * 1000;
+
 export async function POST(req: NextRequest) {
   try {
     // Parse request body
     const { provider = 'openai', model = 'gpt-3.5-turbo', chatContext } = await req.json();
+
+    // Rate Limiting Logic
+    const now = Date.now();
+    const providerTimestamps = requestTimestamps[provider] || [];
+
+    // Filter out old timestamps
+    const recentTimestamps = providerTimestamps.filter(
+      timestamp => now - timestamp < WINDOW_MS
+    );
+
+    // Check the limit
+    if (recentTimestamps.length >= MAX_REQUESTS_PER_MINUTE) {
+      return NextResponse.json(
+        { error: 'Too many requests for this provider. Please try again later.' },
+        { status: 429 }
+      );
+    }
+
+    // Record current request
+    recentTimestamps.push(now);
+    requestTimestamps[provider] = recentTimestamps;
     
     // Validate chat context
     if (!Array.isArray(chatContext)) {

@@ -110,7 +110,7 @@ Refactor the backend chat API to support multiple LLM providers (OpenAI, Anthrop
 ## 10. (Optional) Advanced
 
 - [x] Support per-provider/model configuration (e.g., temperature, max_tokens) via the registry or request payload.
-- [ ] Implement rate limiting or abuse prevention logic per provider.
+- [x] Implement rate limiting or abuse prevention logic per provider.
 
 ---
 

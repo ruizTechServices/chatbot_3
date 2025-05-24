@@ -36,6 +36,7 @@ const ModelSelector = ({
   disabled
 }: ModelSelectorProps) => {
   // Find current provider's available models
+  // Find current provider's available models
   const currentProviderData = providers.find(p => p.providerId === currentProvider);
   const availableModels = currentProviderData?.models || [];
   
@@ -68,8 +69,8 @@ const ModelSelector = ({
           disabled={disabled || availableModels.length === 0}
         >
           {availableModels.map((model) => (
-            <option key={model} value={model}>
-              {model}
+            <option key={model.id} value={model.id} title={model.description || model.name}>
+              {model.name}
             </option>
           ))}
         </select>
@@ -128,7 +129,7 @@ const Chatbot = () => {
     // Set first model as default when changing provider
     const newProviderData = providers.find(p => p.providerId === providerId);
     if (newProviderData && newProviderData.models.length > 0) {
-      setCurrentModel(newProviderData.models[0]);
+      setCurrentModel(newProviderData.models[0].id);
     }
   };
 
