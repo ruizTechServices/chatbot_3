@@ -30,10 +30,10 @@ export function ModelSelector({
     <div className="p-4">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
-          <div className="flex-1 sm:flex-initial">
-            <label className="block text-xs text-gray-400 mb-1">Provider</label>
+          <div className="flex-1 sm:flex-initial min-w-[150px] sm:min-w-[200px]"> {/* Added min-w for better layout */}
+            <label className="block text-xs text-slate-500 dark:text-slate-400 mb-1">Provider</label>
             <select
-              className="w-full bg-[#40414f] text-white border border-gray-600 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:border-gray-400"
+              className="w-full bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-slate-50 border border-slate-300 dark:border-slate-600 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 dark:focus:border-blue-400"
               value={currentProvider}
               onChange={e => onProviderChange(e.target.value)}
               disabled={disabled}
@@ -46,10 +46,10 @@ export function ModelSelector({
             </select>
           </div>
           
-          <div className="flex-1 sm:flex-initial">
-            <label className="block text-xs text-gray-400 mb-1">Model</label>
+          <div className="flex-1 sm:flex-initial min-w-[150px] sm:min-w-[200px]"> {/* Added min-w for better layout */}
+            <label className="block text-xs text-slate-500 dark:text-slate-400 mb-1">Model</label>
             <select
-              className="w-full bg-[#40414f] text-white border border-gray-600 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:border-gray-400"
+              className="w-full bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-slate-50 border border-slate-300 dark:border-slate-600 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 dark:focus:border-blue-400"
               value={currentModel}
               onChange={e => onModelChange(e.target.value)}
               disabled={disabled || !selectedProvider}

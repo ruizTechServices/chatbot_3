@@ -11,7 +11,7 @@ import { ChatUI } from '@/components/chatbot_basic/ChatUI';
 
 export default function ChatbotBasicPage() {
   return (
-    <main className="flex h-screen w-full bg-[#343541] text-white">
+    <main className="flex h-screen w-full bg-[var(--background)] text-[var(--foreground)]">
       <ChatErrorBoundary>
         <ChatProvider>
           <ChatUI />

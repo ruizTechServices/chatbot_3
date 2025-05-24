@@ -25,3 +25,19 @@ export interface ChatContextState {
   currentProvider: string;
   currentModel: string;
 }
+
+export interface ChatSession {
+  id: string;
+  chatContext: Message[];
+  displayName: string;
+  lastModified: number; // Using number (timestamp) for easier sorting
+  // Include provider and model in each session for per-session settings
+  currentProvider: string;
+  currentModel:string;
+  error: string | null; // Session-specific error
+  loading: boolean; // Session-specific loading state
+}
+
+export interface ChatSessions {
+  [sessionId: string]: ChatSession;
+}
